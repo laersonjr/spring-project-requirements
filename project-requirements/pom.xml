@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.laerson</groupId>
-    <artifactId>project-requirements</artifactId>
+    <artifactId>project-requirements-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>project-requirements</name>
     <description>project-requirements</description>
