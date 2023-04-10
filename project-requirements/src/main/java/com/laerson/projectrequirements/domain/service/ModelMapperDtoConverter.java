@@ -1,7 +1,5 @@
 package com.laerson.projectrequirements.domain.service;
 
-import com.laerson.projectrequirements.api.modelDTO.input.ProjectInput;
-import com.laerson.projectrequirements.domain.model.Project;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
