@@ -21,6 +21,7 @@ public class Project {
     private LocalDateTime startDate;
     private LocalDateTime expectedDate;
     private LocalDateTime finalizedDate;
+    @Enumerated(EnumType.STRING)
     private ProcessStatus status;
 
 }
