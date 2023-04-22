@@ -1,5 +1,6 @@
 package com.laerson.projectrequirements.domain.service;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -29,5 +30,11 @@ public class ModelMapperDtoConverter implements ConverterDTO {
     @Override
     public <S, T> T convertToEntity(S dto, Class<T> entity) {
         return modelMapper.map(dto, entity);
+    }
+
+    @Override
+    public <S, T> void configureModelMapperForUpdate(S source, T target) {
+        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
+        modelMapper.map(source, target);
     }
 }

@@ -7,4 +7,6 @@ public interface ConverterDTO {
     <S, T> T convertToModelDTO(S entity, Class<T> dtoClass);
     <S, T> List<T> convertToModelListDTO(List<S> entities, Class<T> dtoClass);
     <S, T> T convertToEntity(S dto, Class<T> entity);
+    <S, T> void configureModelMapperForUpdate(S source, T target);
+
 }

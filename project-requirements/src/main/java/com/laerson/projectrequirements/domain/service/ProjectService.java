@@ -22,23 +22,12 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
+    //TODO: Tratar exceção lançada quando passa um id no json diferente do que consta na URL
     public Project updateProjectService(Long idProject, Project project) {
         Project updateProject = findProjectOrThrow(idProject);
 
-        if(project.getStatus() == null) {
-            project.setStatus(updateProject.getStatus());
-        }
-        if(project.getStartDate() == null) {
-            project.setStartDate(updateProject.getStartDate());
-        }
-        if(project.getExpectedDate() == null) {
-            project.setExpectedDate(updateProject.getExpectedDate());
-        }
-        if(project.getFinalizedDate() == null) {
-            project.setFinalizedDate(updateProject.getFinalizedDate());
-        }
+        modelMapperDtoConverter.configureModelMapperForUpdate(project, updateProject);
 
-        BeanUtils.copyProperties(project, updateProject, "id");
         return projectRepository.save(updateProject);
     }
 
