@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/projects")
@@ -35,5 +36,34 @@ public class ProjectController {
     public Page<Project> listProject(@RequestParam(required = false, defaultValue = "") String name, Pageable pageable){
         return projectRepository.findByNameContaining(name, pageable);
     }
+
+    @GetMapping("/{idProject}")
+    public ResponseEntity<Project> searchProjectById(@PathVariable Long idProject){
+        return projectRepository.findById(idProject)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{idProject}")
+    public ResponseEntity<Project> updateProjectById(@PathVariable Long idProject,
+                                                        @RequestBody @Valid Project project) {
+        Project updateProject = projectService.updateProjectService(idProject, project);
+
+        return ResponseEntity.ok(updateProject);
+    }
+
+
+    @DeleteMapping("/{idProject}")
+    public ResponseEntity<Void> deleteProjectById(@PathVariable Long idProject){
+            Optional<Project> project = projectRepository.findById(idProject);
+
+            if(project.isPresent()){
+                projectRepository.deleteById(idProject);
+                return ResponseEntity.noContent().build();
+            }
+
+        return ResponseEntity.notFound().build();
+    }
+
 
 }
