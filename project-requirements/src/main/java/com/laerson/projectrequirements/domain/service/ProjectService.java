@@ -9,16 +9,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class ProjectService implements ServiceInterface<Project, ProjectInput> {
+public class ProjectService {
 
     private final ProjectRepository projectRepository;
     private final ModelMapperDtoConverter modelMapperDtoConverter;
 
-
-    @Override
     public Project save(ProjectInput projectInput) {
         Project project = modelMapperDtoConverter.convertToEntity(projectInput, Project.class);
-        project.setStatus(ProcessStatus.OPEN);
+        project.startStatus();
         return projectRepository.save(project);
     }
 }

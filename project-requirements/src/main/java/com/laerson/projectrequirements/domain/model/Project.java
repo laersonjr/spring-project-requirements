@@ -24,4 +24,7 @@ public class Project {
     @Enumerated(EnumType.STRING)
     private ProcessStatus status;
 
+    public void startStatus() {
+        this.status = ProcessStatus.OPEN;
+    }
 }
